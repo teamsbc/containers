@@ -5,6 +5,12 @@ on:
 
 jobs:
   build_and_publish:
+    strategy:
+      matrix:
+        fedora_version:
+          - 42
+          - 43
+          - 44
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Code"
@@ -24,9 +30,14 @@ jobs:
         id: meta
         with:
           images: ghcr.io/teamsbc/ci-rpmbuild
+          tags: |
+            type=raw,value=fedora-${{ matrix.fedora_version }}
+            type=sha
       - name: "Build and Push"
         uses: docker/build-push-action@v6
         with:
+          build-contexts: |
+            fedora=docker-image://quay.io/fedora/fedora:${{ matrix.fedora_version }}
           context: ./ci-rpmbuild
           platforms: linux/amd64,linux/arm64
           push: true

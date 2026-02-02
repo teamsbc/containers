@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora:latest
+FROM fedora
 
 RUN dnf install -qy \
         fedora-packager \

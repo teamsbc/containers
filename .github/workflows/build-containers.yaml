@@ -29,7 +29,7 @@ jobs:
         uses: docker/metadata-action@v5
         id: meta
         with:
-          images: ghcr.io/teamsbc/ci-rpmbuild
+          images: ghcr.io/teamsbc/ci-packages
           tags: |
             type=raw,value=fedora-${{ matrix.fedora_version }}
             type=sha
@@ -38,7 +38,7 @@ jobs:
         with:
           build-contexts: |
             fedora=docker-image://quay.io/fedora/fedora:${{ matrix.fedora_version }}
-          context: ./ci-rpmbuild
+          context: ./ci-packages
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}

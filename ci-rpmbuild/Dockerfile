@@ -1,6 +1,6 @@
 FROM fedora
 
 RUN dnf install -qy \
-        fedora-packager \
-        rpmdevtools \
+        rpm-build \
+        rpmbuild-order \
         awscli2

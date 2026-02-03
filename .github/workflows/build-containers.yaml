@@ -32,7 +32,6 @@ jobs:
           images: ghcr.io/teamsbc/ci-packages
           tags: |
             type=raw,value=fedora-${{ matrix.fedora_version }}
-            type=sha
       - name: "Build and Push"
         uses: docker/build-push-action@v6
         with:

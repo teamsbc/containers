@@ -1,7 +1,11 @@
-name: Build Container Images
+name: Build ci-artifacts
 
 on:
-  push
+  push:
+    paths:
+      - ci-artifacts/*
+    branches:
+      - main
 
 jobs:
   build_and_publish:
@@ -28,7 +32,7 @@ jobs:
         uses: docker/metadata-action@v5
         id: meta
         with:
-          images: ghcr.io/teamsbc/ci-packages
+          images: ghcr.io/teamsbc/ci-artifacts
           tags: |
             type=raw,value=fedora-${{ matrix.fedora_version }}
       - name: "Build and Push"
@@ -36,7 +40,7 @@ jobs:
         with:
           build-contexts: |
             fedora=docker-image://quay.io/fedora/fedora:${{ matrix.fedora_version }}
-          context: ./ci-packages
+          context: ./ci-artifacts
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}

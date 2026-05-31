@@ -1,6 +1,7 @@
 name: Build ci-artifacts
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - ci-artifacts/*

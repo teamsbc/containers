@@ -2,6 +2,8 @@ name: Build ci-artifacts
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
   push:
     paths:
       - ci-artifacts/*
@@ -36,6 +38,7 @@ jobs:
           images: ghcr.io/teamsbc/ci-artifacts
           tags: |
             type=raw,value=fedora-${{ matrix.fedora_version }}
+            type=raw,value=fedora-${{ matrix.fedora_version }}-{{date 'YYYYMMDD'}}
       - name: "Build and Push"
         uses: docker/build-push-action@v6
         with:

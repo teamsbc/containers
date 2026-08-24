@@ -15,8 +15,8 @@ jobs:
     strategy:
       matrix:
         fedora_version:
-          - 44
           - 45
+          - 46
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Code"

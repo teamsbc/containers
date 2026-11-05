@@ -5,4 +5,6 @@ RUN dnf install -qy \
         rpm-sign \
         rpmbuild-order \
         createrepo_c \
-        awscli2
+        awscli2 \
+        git-core \
+        zstd
